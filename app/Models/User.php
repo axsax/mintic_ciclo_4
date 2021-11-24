@@ -16,6 +16,10 @@ class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
 
+    const admin_role ='0';
+    const buyer_role ='1';
+    const seller_role ='2';
+    const provider_role ='3';
     const user_verified ='1';
     const user_not_verified ='0';
     const user_admin ='true';

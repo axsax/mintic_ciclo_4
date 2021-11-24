@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Product extends Model
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+class Product extends Eloquent
 {
-    protected $primaryKey = 'id';
     use HasFactory;
 
     const product_avaliable='1';

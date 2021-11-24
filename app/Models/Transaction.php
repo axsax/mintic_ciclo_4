@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Transaction extends Model
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+class Transaction extends Eloquent
 {
     protected $primaryKey = 'id';
     use HasFactory;
