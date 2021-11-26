@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Transaction;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
+use App\Models\DetailTransaction;
+use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends ApiController
 {
@@ -45,10 +50,70 @@ class TransactionController extends ApiController
      /**
      * Display a listing of the resource.
      *
+         {
+            "cabecera":{
+            "iva":"",
+            "total_price":"",
+            "buyer_id":"",
+            "seller_id":""
+        },
+        "detalle":[{
+            "quantity":"",
+            "product_id":"",
+        },{
+            "quantity":"",
+            "product_id":"",
+        }]
+    }
      * @return \Illuminate\Http\Response
      */
-    public function setTransaction()
+    public function setTransaction(Request $request)
     {
-        //
+        $cabecera =$request->cabecera;
+        $detalle = $request->detalle;
+
+
+        //validaciones
+        $buyer=User::find($cabecera['buyer_id']);
+        if($buyer){
+            for($i=0; $i<count($detalle);$i++){
+                $product =Product::find($detalle[$i]['product_id']);
+                if(!$product){
+                    return $this->errorResponse('El producto no existe', 500);
+                }
+            }
+        }else{
+            return $this->errorResponse('El comprador no existe', 500);
+        }
+
+
+        $transaction = new Transaction([
+            'iva'     => $cabecera['iva'],
+            'total_price'    => $cabecera['total_price'],
+            'buyer_id' => $cabecera['buyer_id'],
+            'seller_id'    =>Auth::user()->id,
+        ]);
+        try {
+            $transaction->save();
+        } catch (Exception $e) {
+            return $this->errorResponse('No se puede crear la transaccion' . $e, 500);
+        }
+        $transaction_id = $transaction->_id;
+
+        for($i=0; $i<count($detalle);$i++){
+            $detail_transactions= new DetailTransaction([
+                'quantity'     => $detalle[$i]['quantity'],
+                'product_id'    => $detalle[$i]['product_id'],
+                'transaction_id' => $transaction_id,
+            ]);
+            try {
+                $detail_transactions->save();
+            } catch (Exception $e) {
+                return $this->errorResponse('No se puede crear el detalle de la  transaccion' . $e, 500);
+            }
+        }
+
+        return $this->perfectResponse('Transaccion creada existosamente!', 201);
+
     }
 }

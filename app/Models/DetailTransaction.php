@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 class DetailTransaction extends Eloquent
 {
-    protected $primaryKey = 'id';
+    protected $primaryKey = '_id';
     use HasFactory;
     protected $fillable=[
         'quantity',
