@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Provider;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
+use App\Models\Provider;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class ProviderController extends ApiController
      */
     public function getAll()
     {
-        $match =['role' =>'3'];
+        $match =['role' =>'3', 'branch'=>Auth::user()->branch];
         $providers = User::where($match)->get();
         //$buyers = Buyer::has('transactions')->get();
         if($providers){
@@ -84,5 +85,10 @@ class ProviderController extends ApiController
                 }
             }
         }
+    }
+    public function destroy(Provider $id)
+    {
+        $id->delete();
+        return $this->perfectResponse('Proveedor eliminada existosamente!', 200);
     }
 }

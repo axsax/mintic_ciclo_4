@@ -13,7 +13,8 @@ class Transaction extends Eloquent
         'iva',
         'buyer_id',
         'seller_id',
-        'total_price'
+        'total_price',
+        'branch'
     ];
 
     public function Buyer(){

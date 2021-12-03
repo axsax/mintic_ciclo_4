@@ -19,7 +19,7 @@ class BuyerController extends ApiController
      */
     public function getAll()
     {
-        $match =['role' =>User::buyer_role];
+        $match =['role' =>User::buyer_role, 'branch'=>Auth::user()->branch];
         $buyers = User::where($match)->get();
         //$buyers = Buyer::has('transactions')->get();
         if($buyers){
@@ -86,6 +86,12 @@ class BuyerController extends ApiController
                 }
             }
         }
+    }
+
+    public function destroy(Buyer $id)
+    {
+        $id->delete();
+        return $this->perfectResponse('Comprador eliminado existosamente!', 200);
     }
 
 }

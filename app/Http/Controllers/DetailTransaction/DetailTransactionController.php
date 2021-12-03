@@ -24,6 +24,7 @@ class DetailTransactionController extends ApiController
 
             $detail_transactions = DB::table('detail_transactions')
             ->join('products', 'products._id', '=', 'detail_transactions.product_id')
+            ->where('detail_transactions.transaction_id',$id)
             ->get();
             //Transaction::select("products.name","detail_transactions.quantity")->join("transactions","detail_transactions.transaction_id","=","transactions.id")->join("products","products.id","=","detail_transactions.product_id")->get();
 

@@ -34,6 +34,7 @@ class User extends Authenticatable {
         'name',
         'email',
         'password',
+        'branch',
         'phone',
         'address',
         'city',
@@ -79,5 +80,8 @@ class User extends Authenticatable {
 
     public function transactions(){
         return $this->hasMany(Transaction::class);// a Buyer have much transaction
+    }
+    public function branches(){
+        return $this->belongsTo(Branch::class);
     }
 }

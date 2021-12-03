@@ -20,7 +20,8 @@ class TransactionController extends ApiController
 
     public function getAllTransactions()
     {
-        $transactions = Transaction::all();
+        $match = ['branch'=>Auth::user()->branch];
+        $transactions = Transaction::where($match)->get();
         //$buyers = Buyer::has('transactions')->get();
         if($transactions){
             return $this->showAll($transactions);
@@ -92,6 +93,7 @@ class TransactionController extends ApiController
             'total_price'    => $cabecera['total_price'],
             'buyer_id' => $cabecera['buyer_id'],
             'seller_id'    =>Auth::user()->id,
+            'branch'    =>Auth::user()->branch,
         ]);
         try {
             $transaction->save();
@@ -115,5 +117,11 @@ class TransactionController extends ApiController
 
         return $this->perfectResponse('Transaccion creada existosamente!', 201);
 
+    }
+
+    public function destroy(Transaction $id)
+    {
+        $id->delete();
+        return $this->perfectResponse('Transaccion eliminada existosamente!', 200);
     }
 }

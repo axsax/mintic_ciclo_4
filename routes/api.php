@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Branch\BranchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Buyer\BuyerController;
@@ -33,23 +34,33 @@ Route::group(['prefix' => 'buyers'], function () {
 Route::group(['prefix' => 'sellers'], function () {
     Route::group(['middleware' => ['auth:api','seller']], function() {
         Route::get('getAllBuyers', [BuyerController::class, 'getAll']);
-        Route::get('getOneBuyer/{id}', [BuyerController::class, 'getOne']);
+        Route::get('sucursal/{sucursal}/getOneBuyer/{id}', [BuyerController::class, 'getOne']);
         Route::patch('updateBuyer/{user}', [BuyerController::class, 'update']);
+        Route::delete('deleteBuyer/{id}', [BuyerController::class, 'destroy']);
 
         Route::get('getAllProviders', [ProviderController::class, 'getAll']);
         Route::get('getOneProvider/{id}', [ProviderController::class, 'getOne']);
         Route::patch('updateProvider/{user}', [ProviderController::class, 'update']);
+        Route::delete('deleteProvider/{id}', [ProviderController::class, 'destroy']);
 
         Route::get('allProducts', [ProductController::class, 'allProducts']);
         Route::get('allProductsBySpecificProvider/{provider}', [ProductController::class, 'allProductsBySpecificProvider']);
+        Route::post('setProduct', [ProductController::class, 'setProduct']);
+        Route::patch('updateProduct/{product}', [ProductController::class, 'updateProduct']);
+        Route::delete('deleteProduct/{id}', [ProductController::class, 'destroy']);
+
+        Route::post('setBranch', [BranchController::class, 'store']);
+        Route::get('getBranch/{branch}', [BranchController::class, 'show']);
 
         Route::get('getAllSellers', [SellerController::class, 'getAll']);
         Route::get('getOneSeller/{id}', [SellerController::class, 'getOne']);
         Route::patch('updateSeller/{user}', [SellerController::class, 'update']);
+        Route::delete('deleteSeller/{id}', [SellerController::class, 'destroy']);
+
         Route::post('setTransaction', [TransactionController::class, 'setTransaction']);
         Route::get('getAllTransactions', [TransactionController::class, 'getAllTransactions']);
         Route::get('getOneTransaction/{id}', [TransactionController::class, 'getOneTransaction']);
-        Route::get('getDetailOfTransaction/{id}', [DetailTransactionController::class, 'getDetailOfTransaction']);
+        Route::delete('deleteTransaction/{id}', [TransactionController::class, 'destroy']);
 
     });
 });

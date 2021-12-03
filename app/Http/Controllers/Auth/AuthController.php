@@ -55,11 +55,13 @@ class AuthController extends ApiController
             'name'     => 'required|string',
             'email'    => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
+            'branch' => 'required|string',
         ]);
         $user = new User([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
+            'branch' => $request->branch,
             'phone'    => '',
             'address'=> '',
             'city'=> '',
@@ -86,14 +88,17 @@ class AuthController extends ApiController
             'name'     => 'required|string',
             'email'    => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
+            'branch' => 'required|string',
         ]);
+
         $user = new User([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
-            'phone'    => '',
-            'address'=> '',
-            'city'=> '',
+            'branch' => $request->branch,
+            'phone'    =>$request->phone,
+            'address'=>$request->address,
+            'city'=>$request->city,
             'role' => '2',
             'admin'=> User::user_not_admin,
         ]);
@@ -117,11 +122,13 @@ class AuthController extends ApiController
             'name'     => 'required|string',
             'email'    => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
+            'branch' => 'required|string',
         ]);
         $user = new User([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
+            'branch' => $request->branch,
             'phone'    => '',
             'address'=> '',
             'city'=> '',

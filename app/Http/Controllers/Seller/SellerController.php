@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\Controller;
+use App\Models\Seller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class SellerController extends ApiController
      */
     public function getAll()
     {
-        $match =['role' =>'2'];
+        $match =['role' =>'2', 'branch'=> Auth::user()->branch];
         $sellers = User::where($match)->get();
         //$buyers = Buyer::has('transactions')->get();
         if($sellers){
@@ -84,5 +85,11 @@ class SellerController extends ApiController
                 }
             }
         }
+    }
+
+    public function destroy(Seller $id)
+    {
+        $id->delete();
+        return $this->perfectResponse('Vendedor eliminada existosamente!', 200);
     }
 }

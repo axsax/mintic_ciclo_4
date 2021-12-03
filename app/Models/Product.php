@@ -13,6 +13,7 @@ class Product extends Eloquent
     const product_not_avaliable='0';
     protected $fillable=[
         'name',
+        'branch',
         'description',
         'iva',
         'quantity',

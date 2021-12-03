@@ -20,7 +20,8 @@ class ProductController extends ApiController
     */
    public function allProducts()
    {
-       $products = Product::all();
+       $match = ['branch' => Auth::user()->branch];
+       $products = Product::where($match)->get();
        //$buyers = Buyer::has('transactions')->get();
        if(!$products->isEmpty() && $products){
            return $this->showAll($products);
@@ -84,6 +85,7 @@ class ProductController extends ApiController
                 'status'=> $request->status,
                 'price'=> $request->price,
                 'provider_id' => Auth::user()->id ,
+                'branch' => Auth::user()->branch ,
             ]);
             try {
                 $product->save();
@@ -168,8 +170,9 @@ class ProductController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $id)
     {
-        //
+        $id->delete();
+        return $this->perfectResponse('Producto eliminado existosamente!', 200);
     }
 }
