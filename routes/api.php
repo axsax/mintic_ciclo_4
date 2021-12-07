@@ -34,7 +34,8 @@ Route::group(['prefix' => 'buyers'], function () {
 Route::group(['prefix' => 'sellers'], function () {
     Route::group(['middleware' => ['auth:api','seller']], function() {
         Route::get('getAllBuyers', [BuyerController::class, 'getAll']);
-        Route::get('sucursal/{sucursal}/getOneBuyer/{id}', [BuyerController::class, 'getOne']);
+        Route::get('getOneBuyer/{id}', [BuyerController::class, 'getOne']);
+        Route::get('getOneBuyerByIdentification/{id}', [BuyerController::class, 'getOneByIdentification']);
         Route::patch('updateBuyer/{user}', [BuyerController::class, 'update']);
         Route::delete('deleteBuyer/{id}', [BuyerController::class, 'destroy']);
 
@@ -54,6 +55,7 @@ Route::group(['prefix' => 'sellers'], function () {
 
         Route::get('getAllSellers', [SellerController::class, 'getAll']);
         Route::get('getOneSeller/{id}', [SellerController::class, 'getOne']);
+        Route::get('getOneSellerByIdentification/{id}', [SellerController::class, 'getOneByIdentification']);
         Route::patch('updateSeller/{user}', [SellerController::class, 'update']);
         Route::delete('deleteSeller/{id}', [SellerController::class, 'destroy']);
 

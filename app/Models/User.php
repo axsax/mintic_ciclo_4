@@ -35,6 +35,7 @@ class User extends Authenticatable {
         'email',
         'password',
         'branch',
+        'identification',
         'phone',
         'address',
         'city',

@@ -46,6 +46,17 @@ class BuyerController extends ApiController
             return $this->errorResponse('No existe el comprador',400);
         }
     }
+    public function getOneByIdentification($id)
+    {
+        $match =['identification' =>$id, 'role' =>User::buyer_role];
+        $buyers = User::where($match)->get()->first();
+        //$buyers = Buyer::has('transactions')->get();
+        if($buyers){
+            return $this->showOne($buyers);
+        }else{
+            return $this->errorResponse('No existe el comprador',400);
+        }
+    }
 
     public function update(Request $request, $user)
     {

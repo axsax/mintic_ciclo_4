@@ -46,6 +46,19 @@ class SellerController extends ApiController
             return $this->errorResponse('No existe el vendedor',400);
         }
     }
+
+    public function getOneByIdentification($id)
+    {
+        $match =['identification' =>$id, 'role' =>'2'];
+        $seller = User::where($match)->get()->first();
+        //$buyers = Buyer::has('transactions')->get();
+        if($seller){
+            return $this->showOne($seller);
+        }else{
+            return $this->errorResponse('No existe el vendedor',400);
+        }
+    }
+
     public function update(Request $request, $user)
     {
         $user = User::find($user);
