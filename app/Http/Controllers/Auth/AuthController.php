@@ -62,6 +62,7 @@ class AuthController extends ApiController
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => bcrypt($request->password),
+            'branch' => $request->branch,
             'identification' => $request->identification,
             'phone'    =>$request->phone,
             'address'=>$request->address,

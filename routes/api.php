@@ -52,6 +52,7 @@ Route::group(['prefix' => 'sellers'], function () {
 
         Route::post('setBranch', [BranchController::class, 'store']);
         Route::get('getBranch/{branch}', [BranchController::class, 'show']);
+        Route::get('allBranches', [BranchController::class, 'getAll']);
 
         Route::get('getAllSellers', [SellerController::class, 'getAll']);
         Route::get('getOneSeller/{id}', [SellerController::class, 'getOne']);

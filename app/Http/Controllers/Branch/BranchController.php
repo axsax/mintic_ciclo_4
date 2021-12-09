@@ -24,4 +24,14 @@ class BranchController extends ApiController
     public function show(Branch $branch){
         return $this->showOne($branch);
     }
+    public function getAll()
+    {
+        $branches = Branch::get();
+        //$buyers = Buyer::has('transactions')->get();
+        if($branches){
+            return $this->showAll($branches);
+        }else{
+            return $this->errorResponse('No existe Sucursales',400);
+        }
+    }
 }
