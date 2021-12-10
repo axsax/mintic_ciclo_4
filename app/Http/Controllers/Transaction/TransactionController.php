@@ -62,18 +62,17 @@ class TransactionController extends ApiController
      * Display a listing of the resource.
      *
          {
-            "cabecera":{
-            "iva":"",
-            "total_price":"",
-            "buyer_id":"",
-            "seller_id":""
+        "cabecera":{
+            "iva":"19",
+            "total_price":"20000",
+            "buyer_id":"619d5689100c000042002174"
         },
         "detalle":[{
-            "quantity":"",
-            "product_id":"",
+            "quantity":"2",
+            "product_id":"619d90f1dc180000ba00145b"
         },{
-            "quantity":"",
-            "product_id":"",
+            "quantity":"3",
+            "product_id":"619da72fdc180000ba001461"
         }]
     }
      * @return \Illuminate\Http\Response
