@@ -62,6 +62,7 @@ Route::group(['prefix' => 'sellers'], function () {
 
         Route::post('setTransaction', [TransactionController::class, 'setTransaction']);
         Route::get('getAllTransactions', [TransactionController::class, 'getAllTransactions']);
+        Route::get('getAllTransactionsOfAllBranches', [TransactionController::class, 'getAllTransactionsOfAllBranches']);
         Route::get('getOneTransaction/{id}', [TransactionController::class, 'getOneTransaction']);
         Route::delete('deleteTransaction/{id}', [TransactionController::class, 'destroy']);
 

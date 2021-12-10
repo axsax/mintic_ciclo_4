@@ -29,6 +29,16 @@ class TransactionController extends ApiController
             return $this->errorResponse('No existe Ventas',400);
         }
     }
+    public function getAllTransactionsOfAllBranches()
+    {
+        $transactions = Transaction::get();
+        //$buyers = Buyer::has('transactions')->get();
+        if($transactions){
+            return $this->showAll($transactions);
+        }else{
+            return $this->errorResponse('No existe Ventas',400);
+        }
+    }
 
       /**
      * Display the specified resource.
