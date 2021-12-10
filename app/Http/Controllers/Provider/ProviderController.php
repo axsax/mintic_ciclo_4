@@ -63,6 +63,9 @@ class ProviderController extends ApiController
                 if ($request->has('admin')) {
                     $user->admin = $request->admin;
                 }
+                if ($request->has('name')) {
+                    $user->name = $request->name;
+                }
                 if ($request->has('phone')) {
                     $user->phone = $request->phone;
                 }

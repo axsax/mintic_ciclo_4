@@ -72,7 +72,9 @@ class SellerController extends ApiController
                     'admin' => 'in:' . User::user_admin . ',' . User::user_not_admin,
                 ];
                 $this->validate($request, $reglas);
-
+                if ($request->has('name')) {
+                    $user->name = $request->name;
+                }
                 if ($request->has('admin')) {
                     $user->admin = $request->admin;
                 }
