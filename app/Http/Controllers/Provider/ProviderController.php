@@ -49,12 +49,12 @@ class ProviderController extends ApiController
     public function update(Request $request, $user)
     {
         $user = User::find($user);
-        if ((Auth::user()->admin === User::user_not_admin) && (Auth::user()->id != $user->id)) {
-            return $this->errorResponse('No se puede actualizar, no eres admin', 401);
-        } else {
-            if (((Auth::user()->admin === ($user->admin))==User::user_admin) && (Auth::user()->id != $user->id)) {
-                return $this->errorResponse('No se puede actualizar, un administrador no puede actualizar otro administrador', 418);
-            } else {
+        // if ((Auth::user()->admin === User::user_not_admin) && (Auth::user()->id != $user->id)) {
+        //     return $this->errorResponse('No se puede actualizar, no eres admin', 401);
+        // } else {
+        //     if (((Auth::user()->admin === ($user->admin))==User::user_admin) && (Auth::user()->id != $user->id)) {
+        //         return $this->errorResponse('No se puede actualizar, un administrador no puede actualizar otro administrador', 418);
+        //     } else {
                 $reglas = [
                     'admin' => 'in:' . User::user_admin . ',' . User::user_not_admin,
                 ];
@@ -83,8 +83,6 @@ class ProviderController extends ApiController
                 } catch (Exception $e) {
                     return $this->errorResponse('Error guardando los datos', 500);
                 }
-            }
-        }
     }
     public function destroy(User $id)
     {
