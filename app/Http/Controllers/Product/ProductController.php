@@ -29,6 +29,16 @@ class ProductController extends ApiController
            return $this->errorResponse('No existe productos',400);
        }
    }
+   public function getOneProduct($product){
+    $match = ['branch' => Auth::user()->branch, '_id' => $product];
+    $product = Product::where($match)->get();
+    //$buyers = Buyer::has('transactions')->get();
+    if(!$product->isEmpty() && $product){
+        return $this->showAll($product);
+    }else{
+        return $this->errorResponse('No existe producto',400);
+    }
+   }
 
    public function allProductsByOwnProvider()
    {

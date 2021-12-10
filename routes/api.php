@@ -44,6 +44,7 @@ Route::group(['prefix' => 'sellers'], function () {
         Route::patch('updateProvider/{user}', [ProviderController::class, 'update']);
         Route::delete('deleteProvider/{id}', [ProviderController::class, 'destroy']);
 
+        Route::get('getOneProduct/{product}', [ProductController::class, 'getOneProduct']);
         Route::get('allProducts', [ProductController::class, 'allProducts']);
         Route::get('allProductsBySpecificProvider/{provider}', [ProductController::class, 'allProductsBySpecificProvider']);
         Route::post('setProduct', [ProductController::class, 'setProduct']);
