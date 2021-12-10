@@ -86,7 +86,7 @@ class ProviderController extends ApiController
             }
         }
     }
-    public function destroy(Provider $id)
+    public function destroy(User $id)
     {
         $id->delete();
         return $this->perfectResponse('Proveedor eliminada existosamente!', 200);

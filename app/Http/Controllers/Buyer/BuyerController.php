@@ -99,7 +99,7 @@ class BuyerController extends ApiController
         }
     }
 
-    public function destroy(Buyer $id)
+    public function destroy(User $id)
     {
         $id->delete();
         return $this->perfectResponse('Comprador eliminado existosamente!', 200);

@@ -100,7 +100,7 @@ class SellerController extends ApiController
         }
     }
 
-    public function destroy(Seller $id)
+    public function destroy(User $id)
     {
         $id->delete();
         return $this->perfectResponse('Vendedor eliminada existosamente!', 200);
